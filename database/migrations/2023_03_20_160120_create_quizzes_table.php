@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('students_id');
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();
