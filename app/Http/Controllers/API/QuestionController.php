@@ -23,7 +23,7 @@ class QuestionController extends Controller
 
         // Get single data
         if ($id) {
-            $question = $questionQuery->with('quiz')->find($id);
+            $question = $questionQuery->with('quiz')->with('choices')->find($id);
 
             if ($question) {
                 return ResponseFormatter::success($question, 'Question found');
@@ -50,9 +50,6 @@ class QuestionController extends Controller
             //create Question
             $Question = Question::create([
                 'description' => $request->description,
-                'choice_1' => $request->choice_1,
-                'choice_2' => $request->choice_2,
-                'choice_3' => $request->choice_3,
                 'quiz_id' => $request->quiz_id,
             ]);
 
@@ -81,9 +78,6 @@ class QuestionController extends Controller
             // Update Question
             $Question->update([
                 'description' => $request->description,
-                'choice_1' => $request->choice_1,
-                'choice_2' => $request->choice_2,
-                'choice_3' => $request->choice_3,
                 'quiz_id' => $request->quiz_id,
             ]);
 

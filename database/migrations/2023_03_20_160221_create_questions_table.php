@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('quiz_id');
             $table->longText('description');
-            $table->string('choice_1');
-            $table->string('choice_2');
-            $table->string('choice_3');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

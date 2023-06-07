@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('student_id');
             $table->bigInteger('question_id');
-            $table->string('answer');
+            $table->bigInteger('choice_id');
             $table->softDeletes();
             $table->timestamps();
         });

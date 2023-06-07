@@ -22,9 +22,14 @@ class CreateStudent extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'nim' => 'required|string|max:255',
-            'prodi' => 'required|string|max:255',
+            // 'name' => 'required|string|max:255',
+            // 'nim' => 'required|string|max:255',
+            // 'prodi' => 'required|string|max:255',
+            'type' => 'string|max:255',
+            'user_id' => 'required|integer|exists:users,id',
+            'amount_visual' => 'integer',
+            'amount_kinesthetic' => 'integer',
+            'amount_auditorial' => 'integer',
         ];
     }
 }

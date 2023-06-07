@@ -23,9 +23,6 @@ class CreateQuestion extends FormRequest
     {
         return [
             'description' => 'required|string|max:65535',
-            'choice_1' => 'required|string|max:255',
-            'choice_2' => 'required|string|max:255',
-            'choice_3' => 'required|string|max:255',
             'quiz_id' => 'required|integer|exists:quizzes,id',
         ];
     }

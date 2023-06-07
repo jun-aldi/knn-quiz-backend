@@ -15,15 +15,15 @@ class StudentController extends Controller
 
     public function fetch(Request $request)
     {
-        $id = $request->input('id');
+        $user_id = $request->input('user_id');
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
-        $studentQuery = Student::query();
+        $studentQuery = Student::with('user');
 
         // Get single data
-        if ($id) {
-            $student = $studentQuery->find($id);
+        if ($user_id) {
+            $student = $studentQuery->where('user_id', $user_id)->first();;
 
             if ($student) {
                 return ResponseFormatter::success($student, 'student found');
@@ -51,9 +51,14 @@ class StudentController extends Controller
 
             //create student
             $student = Student::create([
-                'name' => $request->name,
-                'nim' => $request->nim,
-                'prodi' => $request->prodi,
+                // 'name' => $request->name,
+                // 'nim' => $request->nim,
+                // 'prodi' => $request->prodi,
+                'amount_visual' => $request->amount_visual,
+                'amount_kinesthetic' => $request->amount_kinesthetic,
+                'amount_auditorial' => $request->amount_auditorial,
+                'type' => $request->type,
+                'user_id' => $request->user_id,
             ]);
 
             //if not created
@@ -80,9 +85,14 @@ class StudentController extends Controller
 
             // Update student
             $student->update([
-                'name' => $request->name,
-                'nim' => $request->nim,
-                'prodi' => $request->prodi,
+                // 'name' => $request->name,
+                // 'nim' => $request->nim,
+                // 'prodi' => $request->prodi,
+                'amount_visual' => $request->amount_visual,
+                'amount_kinesthetic' => $request->amount_kinesthetic,
+                'amount_auditorial' => $request->amount_auditorial,
+                'type' => $request->type,
+                'user_id' => $request->user_id,
             ]);
 
             return ResponseFormatter::success($student, 'student updated');

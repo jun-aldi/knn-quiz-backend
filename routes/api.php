@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\AnswerController;
 use App\Http\Controllers\API\QuestionController;
+use App\Http\Controllers\API\ChoiceController;
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\QuizController;
 use App\Http\Controllers\API\StudentController;
 use App\Http\Controllers\API\UserController;
@@ -47,12 +49,34 @@ Route::prefix('quiz')->middleware('auth:sanctum', 'admin')->name('quiz.')->group
 Route::prefix('question')->middleware('auth:sanctum')->name('question.')->group(function () {
     Route::get('', [QuestionController::class, 'fetch'])->name('fetch');
 });
+// Choice API for student
+Route::prefix('choice')->middleware('auth:sanctum')->name('choice.')->group(function () {
+    Route::get('', [ChoiceController::class, 'fetch'])->name('fetch');
+});
+// Category API for student
+Route::prefix('category')->middleware('auth:sanctum')->name('category.')->group(function () {
+    Route::get('', [CategoryController::class, 'fetch'])->name('fetch');
+});
 
 // Question API for admin roles
-Route::prefix('question')->middleware('auth:sanctum')->name('question.')->group(function () {
+Route::prefix('question')->middleware('auth:sanctum', 'admin')->name('question.')->group(function () {
     Route::post('', [QuestionController::class, 'create'])->name('create');
     Route::post('update/{id}', [QuestionController::class, 'update'])->name('update');
     Route::delete('{id}', [QuestionController::class, 'destroy'])->name('delete');
+});
+
+// Choice API for admin roles
+Route::prefix('choice')->middleware('auth:sanctum', 'admin')->name('choice.')->group(function () {
+    Route::post('', [ChoiceController::class, 'create'])->name('create');
+    Route::post('update/{id}', [ChoiceController::class, 'update'])->name('update');
+    Route::delete('{id}', [ChoiceController::class, 'destroy'])->name('delete');
+});
+
+// Category API for admin roles
+Route::prefix('category')->middleware('auth:sanctum')->name('category.')->group(function () {
+    Route::post('', [CategoryController::class, 'create'])->name('create');
+    Route::post('update/{id}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('{id}', [CategoryController::class, 'destroy'])->name('delete');
 });
 
 // Answer API for student

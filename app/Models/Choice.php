@@ -6,30 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Answer extends Model
+class Choice extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'student_id',
+        'name',
         'question_id',
-        // 'answer',
-        'choice_id',
+        'category_id',
     ];
 
-    //inverse one to many
-    public function student()
+    public function answer()
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasMany(Answer::class);
     }
 
     public function question()
     {
-        return $this->belongsTo(Question::class);
+        return $this->hasOne(Question::class);
     }
 
-    public function choice()
+    //inverse one to many
+    public function category()
     {
-        return $this->belongsTo(Choice::class);
+        return $this->belongsTo(Category::class);
     }
 }

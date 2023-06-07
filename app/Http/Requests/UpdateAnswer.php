@@ -21,9 +21,9 @@ class UpdateAnswer extends FormRequest
     public function rules(): array
     {
         return [
-            'answer' => 'required|string|max:255',
             'student_id' => 'required|integer|exists:students,id',
             'question_id' => 'required|integer|exists:questions,id',
+            'choice_id' => 'required|integer',
         ];
     }
 }

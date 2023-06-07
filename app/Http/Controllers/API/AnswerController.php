@@ -23,7 +23,7 @@ class AnswerController extends Controller
 
         // Get single data
         if ($id) {
-            $Answer = $AnswerQuery->with('responsibilities')->find($id);
+            $Answer = $AnswerQuery  ->find($id);
 
             if ($Answer) {
                 return ResponseFormatter::success($Answer, 'Answer found');
@@ -33,7 +33,7 @@ class AnswerController extends Controller
         }
 
         // Get multiple data
-        $Answers = $AnswerQuery->where('student_id', $request->student_id);
+        $Answers = $AnswerQuery->with('choice')->with('question')->where('student_id', $request->student_id);
 
 
         return ResponseFormatter::success(
@@ -49,9 +49,10 @@ class AnswerController extends Controller
 
             //create Answer
             $Answer = Answer::create([
-                'answer' => $request->answer,
+                // 'answer' => $request->answer,
                 'student_id' => $request->student_id,
                 'question_id' => $request->question_id,
+                'choice_id' => $request->choice_id,
             ]);
 
             //if not created
@@ -78,7 +79,7 @@ class AnswerController extends Controller
 
             // Update Answer
             $Answer->update([
-                'answer' => $request->answer,
+                'choice_id' => $request->choice_id,
                 'student_id' => $request->student_id,
                 'question_id' => $request->question_id,
             ]);

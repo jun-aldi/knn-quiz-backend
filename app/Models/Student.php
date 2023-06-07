@@ -11,13 +11,21 @@ class Student extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name',
-        'nim',
-        'prodi',
+        'amount_visual',
+        'amount_kinesthetic',
+        'amount_auditorial',
+        'user_id',
     ];
 
     public function answers()
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }
