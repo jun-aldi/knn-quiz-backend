@@ -15,6 +15,7 @@ class Student extends Model
         'amount_kinesthetic',
         'amount_auditorial',
         'user_id',
+        'type'
     ];
 
     public function answers()
