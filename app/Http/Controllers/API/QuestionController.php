@@ -16,7 +16,7 @@ class QuestionController extends Controller
     public function fetch(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 10);
+        $limit = $request->input('limit', 30);
 
 
         $questionQuery = Question::withCount('quiz');
