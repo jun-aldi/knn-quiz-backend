@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->string('amount_visual')->nullable();
-            $table->string('amount_kinesthetic')->nullable();
-            $table->string('amount_auditorial')->nullable();
+            $table->integer('amount_visual')->nullable();
+            $table->integer('amount_kinesthetic')->nullable();
+            $table->integer('amount_auditorial')->nullable();
+            $table->string('type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
